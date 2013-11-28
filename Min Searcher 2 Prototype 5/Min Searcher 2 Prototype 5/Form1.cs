@@ -2693,9 +2693,12 @@ namespace Min_Searcher_2_Prototype_5
             catch
             {
             }
-            if (MessageBox.Show("Do you want to save your bin graphs?", "save graphs?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (bins.Count > 0)
             {
-                this.saveBinGraphs();
+                if (MessageBox.Show("Do you want to save your bin graphs?", "save graphs?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    this.saveBinGraphs();
+                }
             }
             MessageBox.Show("GoodBye!");
         }
