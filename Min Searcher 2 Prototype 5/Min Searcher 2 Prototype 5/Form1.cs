@@ -26,9 +26,9 @@ namespace Min_Searcher_2_Prototype_5
         private bool firstGraph = true;//keeps track of when graph is first made
         //names of files and programs used in program can be changed here
         //the gnuplot names have a lot of slashes that is because gnuplot requires double slashes
-        private string programFolderPath = @"C:\Users\GEARHARTJJ1\Documents\College\Junior year\Fall\Min Search Program\Min Searcher 2 Prototype 5\";
-        private string generatedFilesFolderGnuplotPath = "\"C:\\\\Users\\\\gearhartjj1\\\\documents\\\\college\\\\Junior year\\\\Fall\\\\Min Search Program\\\\Min Searcher 2 Prototype 5\\\\Generated Files\\\\";
-        private string pathForTemplateOutput = @"C:\Users\gearhartjj1\documents\college\Junior year\Fall\Min Search Program\Min Searcher 2 Prototype 5\\";
+        private string programFolderPath = @"C:\Users\GEARHARTJJ1\Documents\GitHub\MinSearchProgram\Min Searcher 2 Prototype 5\";
+        private string generatedFilesFolderGnuplotPath = "\"C:\\\\Users\\\\gearhartjj1\\\\documents\\\\GitHub\\\\MinSearchProgram\\\\Min Searcher 2 Prototype 5\\\\Generated Files\\\\";
+        private string pathForTemplateOutput = @"C:\Users\gearhartjj1\documents\GitHub\MinSearchProgram\Min Searcher 2 Prototype 5\\";
         private string templateOutputName = "outputTemplate.xlsx";
         private string gnuplotLocation = @"C:\Program Files (x86)\gnuplot\bin\gnuplot.exe";
         //locations for graph data to be saved in
@@ -1379,8 +1379,9 @@ namespace Min_Searcher_2_Prototype_5
                 this.openFileButton.Visible = false;
                 this.loadBinDataButton.Visible = false;
             }
-            catch
+            catch(Exception ex)
             {
+                MessageBox.Show(ex.Message);
                 if (this.openFileDialog1.FileName != "")
                     MessageBox.Show("Input file not in correct format");
             }
