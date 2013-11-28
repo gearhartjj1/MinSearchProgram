@@ -1039,7 +1039,7 @@ namespace Min_Searcher_2_Prototype_5
         {
             StreamWriter binEGraphCreator = new StreamWriter(binGraphEnergyDataLocation);
             StreamWriter binAGraphCreator = new StreamWriter(binGraphAlphaDataLocation);
-            int binNum = 1;
+            int binNum = 0;
             foreach (Bin b in bins)
             {
                 foreach (MinSearchData data in b.binData)
@@ -1053,8 +1053,8 @@ namespace Min_Searcher_2_Prototype_5
             }
             binEGraphCreator.Close();
             binAGraphCreator.Close();
-            binGraphA = getBinGraphImage(BGAgnu,"alpha");
-            binGraphE = getBinGraphImage(BGEgnu,"energy");
+            binGraphA = getBinGraphImage(BGAgnu, "alpha");
+            binGraphE = getBinGraphImage(BGEgnu, "energy");
             Console.WriteLine("HI");
             this.aBinGraphPictureBox.Image = binGraphA;
             this.eBinGraphPictureBox.Image = binGraphE;
@@ -1067,6 +1067,7 @@ namespace Min_Searcher_2_Prototype_5
         //some kind of key pre made on gui or part of gnuplot graph
         private Image getBinGraphImage(string dataLocation,string graphType)
         {
+            Console.WriteLine("HI");
             string fileName = gnuplotLocation;
             Image graph;
             Process gnuplotProcess = new Process();
@@ -1080,10 +1081,23 @@ namespace Min_Searcher_2_Prototype_5
             StreamReader gnuplotOutput = gnuplotProcess.StandardOutput;//used to get image
             gnuplotInput.WriteLine(String.Format("set terminal pngcairo size 500,400; set xlabel \"real {0}\"; set ylabel \"imaginary {0}\"; set title\"{0} Bin Values\"",graphType));//used to get image
             gnuplotInput.Flush();
-            gnuplotInput.WriteLine(String.Format("set view map; set palette rgbformulae 33,13,10; splot {0} with points pt 11 ps 5 palette notitle;exit;", dataLocation));
+            //gnuplotInput.WriteLine(String.Format("set view map; set palette rgbformulae 33,13,10; splot {0} with points pt 11 ps 5 palette notitle;exit;", dataLocation));
+            string plotCommand = "plot ";
+            //for (int i = 0; i < bins.Count-1; i++)
+            //{
+            //    plotCommand += String.Format("\"< awk '{{if($3 == \\\"{0}\\\") print}}' {1}\" u 1:2 t \"{0}\" w p pt 2, \\", i, dataLocation);
+            //}
+            //plotCommand += String.Format("\"< awk '{{if($3 == \\\"{0}\\\") print}}' {1}\" u 1:2 t \"{0}\" w p pt 2;exit;", bins.Count-1, dataLocation);
+
+            plotCommand = String.Format("plot {0} u 1:2:3 with points ps 5 lc variable notitle; exit", dataLocation);
+            gnuplotInput.WriteLine("set xrange [0:10]; set yrange [0:10];");
+            gnuplotInput.Flush();
+            gnuplotInput.WriteLine(plotCommand);
+            Console.WriteLine(plotCommand);
             graph = Image.FromStream(gnuplotOutput.BaseStream);//used to get image
             gnuplotInput.Close();
             gnuplotProcess.Close();
+            Console.WriteLine("here");            
             return graph;
         }
         //save bin graphs
