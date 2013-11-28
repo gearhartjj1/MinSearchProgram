@@ -37,12 +37,19 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.rootsToIncludeTextBox = new System.Windows.Forms.TextBox();
+            this.decreaseDataSetButton = new System.Windows.Forms.Button();
+            this.advanceDataSetButton = new System.Windows.Forms.Button();
+            this.polynomialTextBox = new System.Windows.Forms.TextBox();
+            this.cancelDeleteButton = new System.Windows.Forms.Button();
+            this.deleteEntireBinButton = new System.Windows.Forms.Button();
+            this.deleteDataPointButton = new System.Windows.Forms.Button();
+            this.openFileButton = new System.Windows.Forms.Button();
+            this.loadBinDataButton = new System.Windows.Forms.Button();
             this.interfaceChanger = new Min_Searcher_2_Prototype_5.TablessTabControl();
             this.chooseInitialDataPage = new System.Windows.Forms.TabPage();
-            this.rangeSelectorControl1 = new CustomRangeSelectorControl.RangeSelectorControl();
             this.chooseInitialDataLabel = new System.Windows.Forms.Label();
             this.rootsToIncludeLabel = new System.Windows.Forms.Label();
-            this.rootsToIncludeTextBox = new System.Windows.Forms.TextBox();
             this.rangeOfDataLabel = new System.Windows.Forms.Label();
             this.startOfRangeTextBox = new System.Windows.Forms.TextBox();
             this.toRangeLabel = new System.Windows.Forms.Label();
@@ -59,11 +66,8 @@
             this.realLabel = new System.Windows.Forms.Label();
             this.imaginaryGuessTextBox = new System.Windows.Forms.TextBox();
             this.imaginaryLabel = new System.Windows.Forms.Label();
-            this.decreaseDataSetButton = new System.Windows.Forms.Button();
             this.dataSetLabel = new System.Windows.Forms.Label();
-            this.advanceDataSetButton = new System.Windows.Forms.Button();
             this.polynomialValueLabel = new System.Windows.Forms.Label();
-            this.polynomialTextBox = new System.Windows.Forms.TextBox();
             this.rootsToUseLabel = new System.Windows.Forms.Label();
             this.rootInUse1TextBox = new System.Windows.Forms.TextBox();
             this.rootInUse2TextBox = new System.Windows.Forms.TextBox();
@@ -114,11 +118,8 @@
             this.combineBinsCheckedListBox = new System.Windows.Forms.CheckedListBox();
             this.blankPage = new System.Windows.Forms.TabPage();
             this.deletePage = new System.Windows.Forms.TabPage();
-            this.cancelDeleteButton = new System.Windows.Forms.Button();
-            this.deleteEntireBinButton = new System.Windows.Forms.Button();
             this.choosePointToDeleteLabel = new System.Windows.Forms.Label();
             this.dataPointToDeleteTextBox = new System.Windows.Forms.TextBox();
-            this.deleteDataPointButton = new System.Windows.Forms.Button();
             this.selectBinToDeleteButton = new System.Windows.Forms.Button();
             this.chooseBinToDeleteFromLabel = new System.Windows.Forms.Label();
             this.binsToDeleteComboBox = new System.Windows.Forms.ComboBox();
@@ -131,15 +132,13 @@
             this.statsDataLabel = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.graphPage = new System.Windows.Forms.TabPage();
-            this.openFileButton = new System.Windows.Forms.Button();
-            this.loadBinDataButton = new System.Windows.Forms.Button();
             this.graphPictureBox1 = new System.Windows.Forms.PictureBox();
             this.binGraphTabPage = new System.Windows.Forms.TabPage();
+            this.energyGraphLabel = new System.Windows.Forms.Label();
+            this.alphaGraphLabel = new System.Windows.Forms.Label();
             this.viewBinDataButton = new System.Windows.Forms.Button();
             this.eBinGraphPictureBox = new System.Windows.Forms.PictureBox();
             this.aBinGraphPictureBox = new System.Windows.Forms.PictureBox();
-            this.alphaGraphLabel = new System.Windows.Forms.Label();
-            this.energyGraphLabel = new System.Windows.Forms.Label();
             this.interfaceChanger.SuspendLayout();
             this.chooseInitialDataPage.SuspendLayout();
             this.graphVariablesPage.SuspendLayout();
@@ -170,6 +169,112 @@
             this.toolTip1.IsBalloon = true;
             this.toolTip1.ReshowDelay = 100;
             // 
+            // rootsToIncludeTextBox
+            // 
+            this.rootsToIncludeTextBox.Location = new System.Drawing.Point(311, 103);
+            this.rootsToIncludeTextBox.Name = "rootsToIncludeTextBox";
+            this.rootsToIncludeTextBox.Size = new System.Drawing.Size(128, 20);
+            this.rootsToIncludeTextBox.TabIndex = 2;
+            this.toolTip1.SetToolTip(this.rootsToIncludeTextBox, "Enter roots seperated by spaces\r\nOr enter a range of roots in the form of start-e" +
+        "nd\r\nNo more than 5 roots");
+            // 
+            // decreaseDataSetButton
+            // 
+            this.decreaseDataSetButton.Font = new System.Drawing.Font("Californian FB", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.decreaseDataSetButton.Location = new System.Drawing.Point(489, 89);
+            this.decreaseDataSetButton.Name = "decreaseDataSetButton";
+            this.decreaseDataSetButton.Size = new System.Drawing.Size(100, 23);
+            this.decreaseDataSetButton.TabIndex = 107;
+            this.decreaseDataSetButton.Text = "Previous Sets";
+            this.toolTip1.SetToolTip(this.decreaseDataSetButton, "Data used will start on the previous point");
+            this.decreaseDataSetButton.UseVisualStyleBackColor = true;
+            this.decreaseDataSetButton.Visible = false;
+            this.decreaseDataSetButton.Click += new System.EventHandler(this.decreaseDataSetButton_Click);
+            // 
+            // advanceDataSetButton
+            // 
+            this.advanceDataSetButton.Font = new System.Drawing.Font("Californian FB", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.advanceDataSetButton.Location = new System.Drawing.Point(489, 60);
+            this.advanceDataSetButton.Name = "advanceDataSetButton";
+            this.advanceDataSetButton.Size = new System.Drawing.Size(100, 23);
+            this.advanceDataSetButton.TabIndex = 106;
+            this.advanceDataSetButton.Text = "Next Sets";
+            this.toolTip1.SetToolTip(this.advanceDataSetButton, "Data used will start at the next point");
+            this.advanceDataSetButton.UseVisualStyleBackColor = true;
+            this.advanceDataSetButton.Visible = false;
+            this.advanceDataSetButton.Click += new System.EventHandler(this.advanceDataSetButton_Click);
+            // 
+            // polynomialTextBox
+            // 
+            this.polynomialTextBox.Location = new System.Drawing.Point(276, 73);
+            this.polynomialTextBox.Name = "polynomialTextBox";
+            this.polynomialTextBox.Size = new System.Drawing.Size(137, 20);
+            this.polynomialTextBox.TabIndex = 6;
+            this.toolTip1.SetToolTip(this.polynomialTextBox, "For more than one polynomial\r\nput in first-last polynomial you want for a range\r\n" +
+        "or just the polynomials you want seperated by spaces");
+            // 
+            // cancelDeleteButton
+            // 
+            this.cancelDeleteButton.Font = new System.Drawing.Font("Californian FB", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cancelDeleteButton.Location = new System.Drawing.Point(6, 176);
+            this.cancelDeleteButton.Name = "cancelDeleteButton";
+            this.cancelDeleteButton.Size = new System.Drawing.Size(100, 23);
+            this.cancelDeleteButton.TabIndex = 112;
+            this.cancelDeleteButton.Text = "Cancel";
+            this.toolTip1.SetToolTip(this.cancelDeleteButton, "Removes Entire Bin of Data");
+            this.cancelDeleteButton.UseVisualStyleBackColor = true;
+            this.cancelDeleteButton.Click += new System.EventHandler(this.cancelDeleteButton_Click);
+            // 
+            // deleteEntireBinButton
+            // 
+            this.deleteEntireBinButton.Font = new System.Drawing.Font("Californian FB", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.deleteEntireBinButton.Location = new System.Drawing.Point(501, 92);
+            this.deleteEntireBinButton.Name = "deleteEntireBinButton";
+            this.deleteEntireBinButton.Size = new System.Drawing.Size(100, 23);
+            this.deleteEntireBinButton.TabIndex = 111;
+            this.deleteEntireBinButton.Text = "Delete Whole Bin";
+            this.toolTip1.SetToolTip(this.deleteEntireBinButton, "Removes Entire Bin of Data");
+            this.deleteEntireBinButton.UseVisualStyleBackColor = true;
+            this.deleteEntireBinButton.Visible = false;
+            this.deleteEntireBinButton.Click += new System.EventHandler(this.deleteEntireBinButton_Click);
+            // 
+            // deleteDataPointButton
+            // 
+            this.deleteDataPointButton.Font = new System.Drawing.Font("Californian FB", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.deleteDataPointButton.Location = new System.Drawing.Point(379, 92);
+            this.deleteDataPointButton.Name = "deleteDataPointButton";
+            this.deleteDataPointButton.Size = new System.Drawing.Size(100, 23);
+            this.deleteDataPointButton.TabIndex = 109;
+            this.deleteDataPointButton.Text = "Choose Point";
+            this.toolTip1.SetToolTip(this.deleteDataPointButton, "Remove specific point from bin");
+            this.deleteDataPointButton.UseVisualStyleBackColor = true;
+            this.deleteDataPointButton.Visible = false;
+            this.deleteDataPointButton.Click += new System.EventHandler(this.deleteDataPointButton_Click);
+            // 
+            // openFileButton
+            // 
+            this.openFileButton.Font = new System.Drawing.Font("Californian FB", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.openFileButton.Location = new System.Drawing.Point(7, 16);
+            this.openFileButton.Name = "openFileButton";
+            this.openFileButton.Size = new System.Drawing.Size(94, 23);
+            this.openFileButton.TabIndex = 0;
+            this.openFileButton.Text = "Open Data File";
+            this.toolTip1.SetToolTip(this.openFileButton, "Input file must have one x and y data point on each row");
+            this.openFileButton.UseVisualStyleBackColor = true;
+            this.openFileButton.Click += new System.EventHandler(this.openFileButton_Click);
+            // 
+            // loadBinDataButton
+            // 
+            this.loadBinDataButton.Font = new System.Drawing.Font("Californian FB", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.loadBinDataButton.Location = new System.Drawing.Point(7, 45);
+            this.loadBinDataButton.Name = "loadBinDataButton";
+            this.loadBinDataButton.Size = new System.Drawing.Size(94, 23);
+            this.loadBinDataButton.TabIndex = 114;
+            this.loadBinDataButton.Text = "Load Bin Data";
+            this.toolTip1.SetToolTip(this.loadBinDataButton, "Must use a previously created bin data file");
+            this.loadBinDataButton.UseVisualStyleBackColor = true;
+            this.loadBinDataButton.Click += new System.EventHandler(this.loadBinDataButton_Click);
+            // 
             // interfaceChanger
             // 
             this.interfaceChanger.Controls.Add(this.chooseInitialDataPage);
@@ -189,7 +294,6 @@
             // chooseInitialDataPage
             // 
             this.chooseInitialDataPage.BackColor = System.Drawing.Color.AntiqueWhite;
-            this.chooseInitialDataPage.Controls.Add(this.rangeSelectorControl1);
             this.chooseInitialDataPage.Controls.Add(this.chooseInitialDataLabel);
             this.chooseInitialDataPage.Controls.Add(this.rootsToIncludeLabel);
             this.chooseInitialDataPage.Controls.Add(this.rootsToIncludeTextBox);
@@ -204,34 +308,6 @@
             this.chooseInitialDataPage.Size = new System.Drawing.Size(619, 232);
             this.chooseInitialDataPage.TabIndex = 0;
             this.chooseInitialDataPage.Text = "Initial Data";
-            // 
-            // rangeSelectorControl1
-            // 
-            this.rangeSelectorControl1.BackColor = System.Drawing.Color.AntiqueWhite;
-            this.rangeSelectorControl1.DelimiterForRange = ",";
-            this.rangeSelectorControl1.DisabledBarColor = System.Drawing.Color.Gray;
-            this.rangeSelectorControl1.DisabledRangeLabelColor = System.Drawing.Color.Gray;
-            this.rangeSelectorControl1.GapFromLeftMargin = ((uint)(10u));
-            this.rangeSelectorControl1.GapFromRightMargin = ((uint)(10u));
-            this.rangeSelectorControl1.HeightOfThumb = 20F;
-            this.rangeSelectorControl1.InFocusBarColor = System.Drawing.Color.Thistle;
-            this.rangeSelectorControl1.InFocusRangeLabelColor = System.Drawing.Color.Green;
-            this.rangeSelectorControl1.LabelFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.rangeSelectorControl1.LeftThumbImagePath = null;
-            this.rangeSelectorControl1.Location = new System.Drawing.Point(584, 128);
-            this.rangeSelectorControl1.MiddleBarWidth = ((uint)(3u));
-            this.rangeSelectorControl1.Name = "rangeSelectorControl1";
-            this.rangeSelectorControl1.OutputStringFontColor = System.Drawing.Color.Black;
-            this.rangeSelectorControl1.Range1 = null;
-            this.rangeSelectorControl1.Range2 = null;
-            this.rangeSelectorControl1.RangeString = "Range";
-            this.rangeSelectorControl1.RangeValues = "0,10,20,30,Good,50,60,70,Great,90,100";
-            this.rangeSelectorControl1.RightThumbImagePath = null;
-            this.rangeSelectorControl1.Size = new System.Drawing.Size(360, 80);
-            this.rangeSelectorControl1.TabIndex = 113;
-            this.rangeSelectorControl1.ThumbColor = System.Drawing.Color.Purple;
-            this.rangeSelectorControl1.WidthOfThumb = 10F;
-            this.rangeSelectorControl1.XMLFileName = null;
             // 
             // chooseInitialDataLabel
             // 
@@ -252,15 +328,6 @@
             this.rootsToIncludeLabel.Size = new System.Drawing.Size(114, 19);
             this.rootsToIncludeLabel.TabIndex = 22;
             this.rootsToIncludeLabel.Text = "Roots To Include";
-            // 
-            // rootsToIncludeTextBox
-            // 
-            this.rootsToIncludeTextBox.Location = new System.Drawing.Point(311, 103);
-            this.rootsToIncludeTextBox.Name = "rootsToIncludeTextBox";
-            this.rootsToIncludeTextBox.Size = new System.Drawing.Size(128, 20);
-            this.rootsToIncludeTextBox.TabIndex = 2;
-            this.toolTip1.SetToolTip(this.rootsToIncludeTextBox, "Enter roots seperated by spaces\r\nOr enter a range of roots in the form of start-e" +
-        "nd\r\nNo more than 5 roots");
             // 
             // rangeOfDataLabel
             // 
@@ -438,19 +505,6 @@
             this.imaginaryLabel.TabIndex = 32;
             this.imaginaryLabel.Text = "Imaginary";
             // 
-            // decreaseDataSetButton
-            // 
-            this.decreaseDataSetButton.Font = new System.Drawing.Font("Californian FB", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.decreaseDataSetButton.Location = new System.Drawing.Point(489, 89);
-            this.decreaseDataSetButton.Name = "decreaseDataSetButton";
-            this.decreaseDataSetButton.Size = new System.Drawing.Size(100, 23);
-            this.decreaseDataSetButton.TabIndex = 107;
-            this.decreaseDataSetButton.Text = "Previous Sets";
-            this.toolTip1.SetToolTip(this.decreaseDataSetButton, "Data used will start on the previous point");
-            this.decreaseDataSetButton.UseVisualStyleBackColor = true;
-            this.decreaseDataSetButton.Visible = false;
-            this.decreaseDataSetButton.Click += new System.EventHandler(this.decreaseDataSetButton_Click);
-            // 
             // dataSetLabel
             // 
             this.dataSetLabel.AutoSize = true;
@@ -462,19 +516,6 @@
             this.dataSetLabel.Text = "Data Sets to Show: 1 to 5";
             this.dataSetLabel.Visible = false;
             // 
-            // advanceDataSetButton
-            // 
-            this.advanceDataSetButton.Font = new System.Drawing.Font("Californian FB", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.advanceDataSetButton.Location = new System.Drawing.Point(489, 60);
-            this.advanceDataSetButton.Name = "advanceDataSetButton";
-            this.advanceDataSetButton.Size = new System.Drawing.Size(100, 23);
-            this.advanceDataSetButton.TabIndex = 106;
-            this.advanceDataSetButton.Text = "Next Sets";
-            this.toolTip1.SetToolTip(this.advanceDataSetButton, "Data used will start at the next point");
-            this.advanceDataSetButton.UseVisualStyleBackColor = true;
-            this.advanceDataSetButton.Visible = false;
-            this.advanceDataSetButton.Click += new System.EventHandler(this.advanceDataSetButton_Click);
-            // 
             // polynomialValueLabel
             // 
             this.polynomialValueLabel.AutoSize = true;
@@ -484,15 +525,6 @@
             this.polynomialValueLabel.Size = new System.Drawing.Size(84, 19);
             this.polynomialValueLabel.TabIndex = 7;
             this.polynomialValueLabel.Text = "Polynomials";
-            // 
-            // polynomialTextBox
-            // 
-            this.polynomialTextBox.Location = new System.Drawing.Point(276, 73);
-            this.polynomialTextBox.Name = "polynomialTextBox";
-            this.polynomialTextBox.Size = new System.Drawing.Size(137, 20);
-            this.polynomialTextBox.TabIndex = 6;
-            this.toolTip1.SetToolTip(this.polynomialTextBox, "For more than one polynomial\r\nput in first-last polynomial you want for a range\r\n" +
-        "or just the polynomials you want seperated by spaces");
             // 
             // rootsToUseLabel
             // 
@@ -1065,31 +1097,6 @@
             this.deletePage.TabIndex = 8;
             this.deletePage.Text = "Delete Page";
             // 
-            // cancelDeleteButton
-            // 
-            this.cancelDeleteButton.Font = new System.Drawing.Font("Californian FB", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cancelDeleteButton.Location = new System.Drawing.Point(6, 176);
-            this.cancelDeleteButton.Name = "cancelDeleteButton";
-            this.cancelDeleteButton.Size = new System.Drawing.Size(100, 23);
-            this.cancelDeleteButton.TabIndex = 112;
-            this.cancelDeleteButton.Text = "Cancel";
-            this.toolTip1.SetToolTip(this.cancelDeleteButton, "Removes Entire Bin of Data");
-            this.cancelDeleteButton.UseVisualStyleBackColor = true;
-            this.cancelDeleteButton.Click += new System.EventHandler(this.cancelDeleteButton_Click);
-            // 
-            // deleteEntireBinButton
-            // 
-            this.deleteEntireBinButton.Font = new System.Drawing.Font("Californian FB", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.deleteEntireBinButton.Location = new System.Drawing.Point(501, 92);
-            this.deleteEntireBinButton.Name = "deleteEntireBinButton";
-            this.deleteEntireBinButton.Size = new System.Drawing.Size(100, 23);
-            this.deleteEntireBinButton.TabIndex = 111;
-            this.deleteEntireBinButton.Text = "Delete Whole Bin";
-            this.toolTip1.SetToolTip(this.deleteEntireBinButton, "Removes Entire Bin of Data");
-            this.deleteEntireBinButton.UseVisualStyleBackColor = true;
-            this.deleteEntireBinButton.Visible = false;
-            this.deleteEntireBinButton.Click += new System.EventHandler(this.deleteEntireBinButton_Click);
-            // 
             // choosePointToDeleteLabel
             // 
             this.choosePointToDeleteLabel.AutoSize = true;
@@ -1108,19 +1115,6 @@
             this.dataPointToDeleteTextBox.Size = new System.Drawing.Size(100, 20);
             this.dataPointToDeleteTextBox.TabIndex = 108;
             this.dataPointToDeleteTextBox.Visible = false;
-            // 
-            // deleteDataPointButton
-            // 
-            this.deleteDataPointButton.Font = new System.Drawing.Font("Californian FB", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.deleteDataPointButton.Location = new System.Drawing.Point(379, 92);
-            this.deleteDataPointButton.Name = "deleteDataPointButton";
-            this.deleteDataPointButton.Size = new System.Drawing.Size(100, 23);
-            this.deleteDataPointButton.TabIndex = 109;
-            this.deleteDataPointButton.Text = "Choose Point";
-            this.toolTip1.SetToolTip(this.deleteDataPointButton, "Remove specific point from bin");
-            this.deleteDataPointButton.UseVisualStyleBackColor = true;
-            this.deleteDataPointButton.Visible = false;
-            this.deleteDataPointButton.Click += new System.EventHandler(this.deleteDataPointButton_Click);
             // 
             // selectBinToDeleteButton
             // 
@@ -1309,30 +1303,6 @@
             this.graphPage.TabIndex = 1;
             this.graphPage.Text = "Graph";
             // 
-            // openFileButton
-            // 
-            this.openFileButton.Font = new System.Drawing.Font("Californian FB", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.openFileButton.Location = new System.Drawing.Point(7, 16);
-            this.openFileButton.Name = "openFileButton";
-            this.openFileButton.Size = new System.Drawing.Size(94, 23);
-            this.openFileButton.TabIndex = 0;
-            this.openFileButton.Text = "Open Data File";
-            this.toolTip1.SetToolTip(this.openFileButton, "Input file must have one x and y data point on each row");
-            this.openFileButton.UseVisualStyleBackColor = true;
-            this.openFileButton.Click += new System.EventHandler(this.openFileButton_Click);
-            // 
-            // loadBinDataButton
-            // 
-            this.loadBinDataButton.Font = new System.Drawing.Font("Californian FB", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.loadBinDataButton.Location = new System.Drawing.Point(7, 45);
-            this.loadBinDataButton.Name = "loadBinDataButton";
-            this.loadBinDataButton.Size = new System.Drawing.Size(94, 23);
-            this.loadBinDataButton.TabIndex = 114;
-            this.loadBinDataButton.Text = "Load Bin Data";
-            this.toolTip1.SetToolTip(this.loadBinDataButton, "Must use a previously created bin data file");
-            this.loadBinDataButton.UseVisualStyleBackColor = true;
-            this.loadBinDataButton.Click += new System.EventHandler(this.loadBinDataButton_Click);
-            // 
             // graphPictureBox1
             // 
             this.graphPictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -1359,6 +1329,26 @@
             this.binGraphTabPage.Size = new System.Drawing.Size(640, 402);
             this.binGraphTabPage.TabIndex = 2;
             this.binGraphTabPage.Text = "binGraphs";
+            // 
+            // energyGraphLabel
+            // 
+            this.energyGraphLabel.AutoSize = true;
+            this.energyGraphLabel.Font = new System.Drawing.Font("Californian FB", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.energyGraphLabel.Location = new System.Drawing.Point(323, 12);
+            this.energyGraphLabel.Name = "energyGraphLabel";
+            this.energyGraphLabel.Size = new System.Drawing.Size(167, 24);
+            this.energyGraphLabel.TabIndex = 4;
+            this.energyGraphLabel.Text = "Energy Bin Values";
+            // 
+            // alphaGraphLabel
+            // 
+            this.alphaGraphLabel.AutoSize = true;
+            this.alphaGraphLabel.Font = new System.Drawing.Font("Californian FB", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.alphaGraphLabel.Location = new System.Drawing.Point(7, 12);
+            this.alphaGraphLabel.Name = "alphaGraphLabel";
+            this.alphaGraphLabel.Size = new System.Drawing.Size(157, 24);
+            this.alphaGraphLabel.TabIndex = 3;
+            this.alphaGraphLabel.Text = "Alpha Bin Values";
             // 
             // viewBinDataButton
             // 
@@ -1389,26 +1379,6 @@
             this.aBinGraphPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.aBinGraphPictureBox.TabIndex = 0;
             this.aBinGraphPictureBox.TabStop = false;
-            // 
-            // alphaGraphLabel
-            // 
-            this.alphaGraphLabel.AutoSize = true;
-            this.alphaGraphLabel.Font = new System.Drawing.Font("Californian FB", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.alphaGraphLabel.Location = new System.Drawing.Point(7, 12);
-            this.alphaGraphLabel.Name = "alphaGraphLabel";
-            this.alphaGraphLabel.Size = new System.Drawing.Size(157, 24);
-            this.alphaGraphLabel.TabIndex = 3;
-            this.alphaGraphLabel.Text = "Alpha Bin Values";
-            // 
-            // energyGraphLabel
-            // 
-            this.energyGraphLabel.AutoSize = true;
-            this.energyGraphLabel.Font = new System.Drawing.Font("Californian FB", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.energyGraphLabel.Location = new System.Drawing.Point(323, 12);
-            this.energyGraphLabel.Name = "energyGraphLabel";
-            this.energyGraphLabel.Size = new System.Drawing.Size(167, 24);
-            this.energyGraphLabel.TabIndex = 4;
-            this.energyGraphLabel.Text = "Energy Bin Values";
             // 
             // MainForm
             // 
@@ -1556,7 +1526,6 @@
         private System.Windows.Forms.Label chooseAutoSaveBinLabel;
         private System.Windows.Forms.Button autoSaveButton;
         private System.Windows.Forms.ComboBox autoSaveBinComboBox;
-        private CustomRangeSelectorControl.RangeSelectorControl rangeSelectorControl1;
         private System.Windows.Forms.TabPage binGraphTabPage;
         private System.Windows.Forms.PictureBox eBinGraphPictureBox;
         private System.Windows.Forms.PictureBox aBinGraphPictureBox;

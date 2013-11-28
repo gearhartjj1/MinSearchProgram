@@ -1078,13 +1078,42 @@ namespace Min_Searcher_2_Prototype_5
             gnuplotProcess.Start();
             StreamWriter gnuplotInput = gnuplotProcess.StandardInput;
             StreamReader gnuplotOutput = gnuplotProcess.StandardOutput;//used to get image
-            gnuplotInput.WriteLine(String.Format("set terminal pngcairo size 500,400; set xlabel \"real {0}\"; set ylabel \"imaginary {0}\"",graphType));//used to get image
+            gnuplotInput.WriteLine(String.Format("set terminal pngcairo size 500,400; set xlabel \"real {0}\"; set ylabel \"imaginary {0}\"; set title\"{0} Bin Values\"",graphType));//used to get image
             gnuplotInput.Flush();
             gnuplotInput.WriteLine(String.Format("set view map; set palette rgbformulae 33,13,10; splot {0} with points pt 11 ps 5 palette notitle;exit;", dataLocation));
             graph = Image.FromStream(gnuplotOutput.BaseStream);//used to get image
             gnuplotInput.Close();
             gnuplotProcess.Close();
             return graph;
+        }
+        //save bin graphs
+        private void saveBinGraphs()
+        {
+            //save alpha graph
+            saveFileDialog1.ShowDialog();
+            string alphaGraph = saveFileDialog1.FileName;
+            if (!alphaGraph.EndsWith(".png"))
+            {
+                alphaGraph += "alphaGraph.png";
+            }
+            else
+            {
+                alphaGraph.Insert(-4, "alphaGraph");
+            }
+            Bitmap alphaBmp = new Bitmap(binGraphA);
+            alphaBmp.Save(alphaGraph);
+            //save energy graph
+            string energyGraph = saveFileDialog1.FileName;
+            if (!energyGraph.EndsWith(".png"))
+            {
+                energyGraph += "energyGraph.png";
+            }
+            else
+            {
+                energyGraph.Insert(-4, "energyGraph");
+            }
+            Bitmap energyBmp = new Bitmap(binGraphE);
+            energyBmp.Save(energyGraph);
         }
         #endregion
 
@@ -2355,6 +2384,8 @@ namespace Min_Searcher_2_Prototype_5
             this.deleteDataPointButton.Visible = false;
             this.deleteEntireBinButton.Visible = false;
             this.deleteDataButton.Visible = true;
+            //remakes bin graphs accordingly
+            this.createBinGraphs();
         }
         //deletes entire bin of data
         private void deleteEntireBinButton_Click(object sender, EventArgs e)
@@ -2363,6 +2394,8 @@ namespace Min_Searcher_2_Prototype_5
             if (MessageBox.Show(String.Format("Are you sure you want to delete all of bin \"{0}\"?", bins[binToDelete].BinName), "Delete Bin?", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 deleteBin(binToDelete);
+                //remakes bin graphs
+                this.createBinGraphs();
             }
             this.selectBinToDeleteButton.Visible = true;
             this.binsToDeleteComboBox.Visible = true;
@@ -2577,6 +2610,14 @@ namespace Min_Searcher_2_Prototype_5
                 catch
                 {
                 }
+                //asks user if they want to save bin graphs
+                if (bins.Count > 0)
+                {
+                    if (MessageBox.Show("Do you want to save your bin graphs?", "save graphs?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+                        this.saveBinGraphs();
+                    }
+                }
                 MessageBox.Show("GoodBye!");
                 return;
             }
@@ -2651,6 +2692,10 @@ namespace Min_Searcher_2_Prototype_5
             }
             catch
             {
+            }
+            if (MessageBox.Show("Do you want to save your bin graphs?", "save graphs?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                this.saveBinGraphs();
             }
             MessageBox.Show("GoodBye!");
         }
