@@ -166,6 +166,11 @@ namespace Min_Searcher_2_Prototype_5
 
             InitializeComponent();
             graphData = new GraphingDataValues();
+            //temp values for start and end for bin graphs
+            graphData.StartRRange = 0;
+            graphData.StartIRange = 0;
+            graphData.EndRRange = 2;
+            graphData.EndIRange = 2;
             graphData.polynomials = new List<int>();
             this.binOptionsComboBox.DataSource = new BindingSource(binNames, null);
             MinRealRange = .05;
@@ -503,6 +508,9 @@ namespace Min_Searcher_2_Prototype_5
             inputFileWriter.WriteLine(graphData.RealRange);
             inputFileWriter.WriteLine(graphData.ImaginaryRange);
             inputFileWriter.WriteLine(graphData.GridSize);//size of grid access could become a variable if necessary
+            //uncomment to use new versions
+            //inputFileWriter.WriteLine(String.Format("{0} {1}"), graphData.StartRRange, graphData.EndRRange);
+            //inputFileWriter.WriteLine(String.Format("{0} {1}"), graphData.StartIRange, graphData.EndIRange);
             inputFileWriter.Close();
         }
         private void createSurfaceGraph(string fileName, string inputFileName = "gridgen.inp")//only generates data for surface graph
@@ -1053,8 +1061,8 @@ namespace Min_Searcher_2_Prototype_5
             }
             binEGraphCreator.Close();
             binAGraphCreator.Close();
-            binGraphA = getBinGraphImage(BGAgnu, "alpha");
-            binGraphE = getBinGraphImage(BGEgnu, "energy");
+            binGraphA = getBinGraphImage(BGAgnu, "alpha", graphData.StartIRange, graphData.EndIRange, graphData.StartRRange, graphData.EndRRange);
+            binGraphE = getBinGraphImage(BGEgnu, "energy", graphData.StartIRange, graphData.EndIRange, graphData.StartRRange, graphData.EndRRange);
             Console.WriteLine("HI");
             this.aBinGraphPictureBox.Image = binGraphA;
             this.eBinGraphPictureBox.Image = binGraphE;
@@ -1065,9 +1073,8 @@ namespace Min_Searcher_2_Prototype_5
         //also need to get the range working a bit more properly so you can see things in a useful way
         //need to be able to identify which color goes to which bin
         //some kind of key pre made on gui or part of gnuplot graph
-        private Image getBinGraphImage(string dataLocation,string graphType)
+        private Image getBinGraphImage(string dataLocation,string graphType,float startImagRange, float endImagRange, float startRealRange, float endRealRange)
         {
-            Console.WriteLine("HI");
             string fileName = gnuplotLocation;
             Image graph;
             Process gnuplotProcess = new Process();
@@ -1082,15 +1089,9 @@ namespace Min_Searcher_2_Prototype_5
             gnuplotInput.WriteLine(String.Format("set terminal pngcairo size 500,400; set xlabel \"real {0}\"; set ylabel \"imaginary {0}\"; set title\"{0} Bin Values\"",graphType));//used to get image
             gnuplotInput.Flush();
             //gnuplotInput.WriteLine(String.Format("set view map; set palette rgbformulae 33,13,10; splot {0} with points pt 11 ps 5 palette notitle;exit;", dataLocation));
-            string plotCommand = "plot ";
-            //for (int i = 0; i < bins.Count-1; i++)
-            //{
-            //    plotCommand += String.Format("\"< awk '{{if($3 == \\\"{0}\\\") print}}' {1}\" u 1:2 t \"{0}\" w p pt 2, \\", i, dataLocation);
-            //}
-            //plotCommand += String.Format("\"< awk '{{if($3 == \\\"{0}\\\") print}}' {1}\" u 1:2 t \"{0}\" w p pt 2;exit;", bins.Count-1, dataLocation);
-
-            plotCommand = String.Format("plot {0} u 1:2:3 with points ps 5 lc variable notitle; exit", dataLocation);
-            gnuplotInput.WriteLine("set xrange [0:10]; set yrange [0:10];");
+            string plotCommand = "";
+            plotCommand = String.Format("plot {0} u 1:2:3 with points ps 2 lc variable notitle; exit", dataLocation);
+            gnuplotInput.WriteLine(String.Format("set xrange [{0}:{1}]; set yrange [{2}:{3}];",startRealRange,endRealRange,startImagRange,endImagRange));
             gnuplotInput.Flush();
             gnuplotInput.WriteLine(plotCommand);
             Console.WriteLine(plotCommand);
@@ -2490,7 +2491,7 @@ namespace Min_Searcher_2_Prototype_5
         //some private classes and structs
         private struct GraphingDataValues
         {
-            public List<int> polynomials;
+            public List<int> polynomials;//used to make multiple polynomials
             public int Polynomial
             {
                 get
@@ -2599,6 +2600,10 @@ namespace Min_Searcher_2_Prototype_5
                 }
             }
             private int _gridSize;
+            public float StartIRange;
+            public float EndIRange;
+            public float StartRRange;
+            public float EndRRange;
         }
         private class GraphPoint
         {
