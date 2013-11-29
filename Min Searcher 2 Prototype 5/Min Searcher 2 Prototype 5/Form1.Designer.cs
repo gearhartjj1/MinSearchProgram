@@ -139,6 +139,12 @@
             this.viewBinDataButton = new System.Windows.Forms.Button();
             this.eBinGraphPictureBox = new System.Windows.Forms.PictureBox();
             this.aBinGraphPictureBox = new System.Windows.Forms.PictureBox();
+            this.minRealTextBox = new System.Windows.Forms.TextBox();
+            this.maxRealTextBox = new System.Windows.Forms.TextBox();
+            this.endImagTextBox = new System.Windows.Forms.TextBox();
+            this.startImagTextBox = new System.Windows.Forms.TextBox();
+            this.realEnergyWindowLabel = new System.Windows.Forms.Label();
+            this.imagEWindowLabel = new System.Windows.Forms.Label();
             this.interfaceChanger.SuspendLayout();
             this.chooseInitialDataPage.SuspendLayout();
             this.graphVariablesPage.SuspendLayout();
@@ -377,6 +383,12 @@
             // graphVariablesPage
             // 
             this.graphVariablesPage.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.graphVariablesPage.Controls.Add(this.imagEWindowLabel);
+            this.graphVariablesPage.Controls.Add(this.realEnergyWindowLabel);
+            this.graphVariablesPage.Controls.Add(this.endImagTextBox);
+            this.graphVariablesPage.Controls.Add(this.startImagTextBox);
+            this.graphVariablesPage.Controls.Add(this.maxRealTextBox);
+            this.graphVariablesPage.Controls.Add(this.minRealTextBox);
             this.graphVariablesPage.Controls.Add(this.numberOfGraphsTextBox);
             this.graphVariablesPage.Controls.Add(this.numberOfGraphsLabel);
             this.graphVariablesPage.Controls.Add(this.cancelChangeGraphButton);
@@ -1380,6 +1392,58 @@
             this.aBinGraphPictureBox.TabIndex = 0;
             this.aBinGraphPictureBox.TabStop = false;
             // 
+            // minRealTextBox
+            // 
+            this.minRealTextBox.Location = new System.Drawing.Point(12, 42);
+            this.minRealTextBox.Name = "minRealTextBox";
+            this.minRealTextBox.Size = new System.Drawing.Size(57, 20);
+            this.minRealTextBox.TabIndex = 113;
+            this.minRealTextBox.Text = "0";
+            // 
+            // maxRealTextBox
+            // 
+            this.maxRealTextBox.Location = new System.Drawing.Point(88, 42);
+            this.maxRealTextBox.Name = "maxRealTextBox";
+            this.maxRealTextBox.Size = new System.Drawing.Size(57, 20);
+            this.maxRealTextBox.TabIndex = 114;
+            this.maxRealTextBox.Text = "20";
+            // 
+            // endImagTextBox
+            // 
+            this.endImagTextBox.Location = new System.Drawing.Point(88, 89);
+            this.endImagTextBox.Name = "endImagTextBox";
+            this.endImagTextBox.Size = new System.Drawing.Size(57, 20);
+            this.endImagTextBox.TabIndex = 116;
+            this.endImagTextBox.Text = "20";
+            // 
+            // startImagTextBox
+            // 
+            this.startImagTextBox.Location = new System.Drawing.Point(12, 89);
+            this.startImagTextBox.Name = "startImagTextBox";
+            this.startImagTextBox.Size = new System.Drawing.Size(57, 20);
+            this.startImagTextBox.TabIndex = 115;
+            this.startImagTextBox.Text = "0";
+            // 
+            // realEnergyWindowLabel
+            // 
+            this.realEnergyWindowLabel.AutoSize = true;
+            this.realEnergyWindowLabel.Font = new System.Drawing.Font("Californian FB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.realEnergyWindowLabel.Location = new System.Drawing.Point(6, 20);
+            this.realEnergyWindowLabel.Name = "realEnergyWindowLabel";
+            this.realEnergyWindowLabel.Size = new System.Drawing.Size(144, 19);
+            this.realEnergyWindowLabel.TabIndex = 117;
+            this.realEnergyWindowLabel.Text = "Real Energy Window";
+            // 
+            // imagEWindowLabel
+            // 
+            this.imagEWindowLabel.AutoSize = true;
+            this.imagEWindowLabel.Font = new System.Drawing.Font("Californian FB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.imagEWindowLabel.Location = new System.Drawing.Point(6, 67);
+            this.imagEWindowLabel.Name = "imagEWindowLabel";
+            this.imagEWindowLabel.Size = new System.Drawing.Size(147, 19);
+            this.imagEWindowLabel.TabIndex = 118;
+            this.imagEWindowLabel.Text = "Imag Energy Window";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1533,6 +1597,12 @@
         private System.Windows.Forms.Button viewBinDataButton;
         private System.Windows.Forms.Label energyGraphLabel;
         private System.Windows.Forms.Label alphaGraphLabel;
+        private System.Windows.Forms.Label imagEWindowLabel;
+        private System.Windows.Forms.Label realEnergyWindowLabel;
+        private System.Windows.Forms.TextBox endImagTextBox;
+        private System.Windows.Forms.TextBox startImagTextBox;
+        private System.Windows.Forms.TextBox maxRealTextBox;
+        private System.Windows.Forms.TextBox minRealTextBox;
     }
 }
 

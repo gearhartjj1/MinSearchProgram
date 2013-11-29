@@ -1977,6 +1977,18 @@ namespace Min_Searcher_2_Prototype_5
                 MessageBox.Show("Improper value for tolerance");
                 return;
             }
+            //get values for data ranges
+            try
+            {
+                graphData.StartRRange = float.Parse(this.minRealTextBox.Text);
+                graphData.EndRRange = float.Parse(this.maxRealTextBox.Text);
+                graphData.StartIRange = float.Parse(this.startImagTextBox.Text);
+                graphData.EndIRange = float.Parse(this.endImagTextBox.Text);
+            }
+            catch
+            {
+                MessageBox.Show("Improper value in one of energy window values");
+            }
             try
             {
                 numberOfGraphs = int.Parse(this.numberOfGraphsTextBox.Text);
@@ -1998,7 +2010,7 @@ namespace Min_Searcher_2_Prototype_5
                 return;
             }
         
-            //insert a loop here to do this multiple times
+            
             dataAndGraphChanger.SelectTab("graphPage");
             interfaceChanger.SelectTab("blankPage");
             this.graphPictureBox1.Image = Min_Searcher_2_Prototype_5.Properties.Resources.Generating_Graph_Image;
@@ -2486,6 +2498,14 @@ namespace Min_Searcher_2_Prototype_5
             masterDataLocation = oldDataLocation;
         }
         #endregion
+        private void viewDataGraphButton_Click(object sender, EventArgs e)
+        {
+            dataAndGraphChanger.SelectTab("binGraphTabPage");
+        }
+        private void viewBinDataButton_Click(object sender, EventArgs e)
+        {
+            dataAndGraphChanger.SelectTab("dataPage");
+        }
         #endregion
 
         //some private classes and structs
@@ -2733,15 +2753,7 @@ namespace Min_Searcher_2_Prototype_5
             AllocConsole();
         }
 
-        private void viewDataGraphButton_Click(object sender, EventArgs e)
-        {
-            dataAndGraphChanger.SelectTab("binGraphTabPage");
-        }
-
-        private void viewBinDataButton_Click(object sender, EventArgs e)
-        {
-            dataAndGraphChanger.SelectTab("dataPage");
-        }
+        
         //end temp stuffs
     }
 
