@@ -161,7 +161,7 @@ namespace Min_Searcher_2_Prototype_5
             BGEgnu = generatedFilesFolderGnuplotPath + "energyBinGraph.txt\"";
             mouseDataFile = generatedFilesFolderGnuplotPath + "MouseData\\\\";
             //program file names
-            gridgenProgramName = programFolderPath + "Program Files\\GridgenWin64.exe";
+            gridgenProgramName = programFolderPath + "Program Files\\range_alp_NO_E_gridgen_64bit_WIN.exe";
             minProgramName = programFolderPath + "Program Files\\PaacWin64.exe";
 
             InitializeComponent();
@@ -509,8 +509,8 @@ namespace Min_Searcher_2_Prototype_5
             inputFileWriter.WriteLine(graphData.ImaginaryRange);
             inputFileWriter.WriteLine(graphData.GridSize);//size of grid access could become a variable if necessary
             //uncomment to use new versions
-            //inputFileWriter.WriteLine(String.Format("{0} {1}"), graphData.StartRRange, graphData.EndRRange);
-            //inputFileWriter.WriteLine(String.Format("{0} {1}"), graphData.StartIRange, graphData.EndIRange);
+            inputFileWriter.WriteLine(String.Format("{0} {1}", graphData.StartRRange, graphData.EndRRange));
+            inputFileWriter.WriteLine(String.Format("{0} {1}", graphData.StartIRange, graphData.EndIRange));
             inputFileWriter.Close();
         }
         private void createSurfaceGraph(string fileName, string inputFileName = "gridgen.inp")//only generates data for surface graph
@@ -1159,7 +1159,15 @@ namespace Min_Searcher_2_Prototype_5
         {
             double x = 0, y = 0;
             GraphPoint pointChosen = new GraphPoint(0, 0);
-            createSurfaceGraph(surfaceDataFileLocation, "gridgen" + polyNumberOfTotal + dataLocation + ".inp");
+            try
+            {
+                createSurfaceGraph(surfaceDataFileLocation, "gridgen" + polyNumberOfTotal + dataLocation + ".inp");
+            }
+            catch
+            {
+                MessageBox.Show(String.Format("graph #{0} for polynomial {1} has failed to generate data", graphNumber, polyValue));
+                return;
+            }
             string programName = gnuplotLocation;
             Process gnuPlot = new Process();
             gnuPlot.StartInfo.FileName = programName;
