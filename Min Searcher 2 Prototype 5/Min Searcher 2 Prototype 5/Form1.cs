@@ -1068,9 +1068,6 @@ namespace Min_Searcher_2_Prototype_5
             this.eBinGraphPictureBox.Image = binGraphE;
         }
 
-        //need a way to stop the colors from changing when making more bins
-        //perhaps rethink the way the colors are generated, might be other options then splot
-        //also need to get the range working a bit more properly so you can see things in a useful way
         //need to be able to identify which color goes to which bin
         //some kind of key pre made on gui or part of gnuplot graph
         private Image getBinGraphImage(string dataLocation,string graphType,float startImagRange, float endImagRange, float startRealRange, float endRealRange)
@@ -1092,6 +1089,14 @@ namespace Min_Searcher_2_Prototype_5
             string plotCommand = "";
             plotCommand = String.Format("plot {0} u 1:2:3 with points ps 2 lc variable notitle; exit", dataLocation);
             gnuplotInput.WriteLine(String.Format("set xrange [{0}:{1}]; set yrange [{2}:{3}];",startRealRange,endRealRange,startImagRange,endImagRange));
+            //new test stuff to make key for bin graphs
+            gnuplotInput.Flush();
+            for (int i = 0; i < bins.Count; i++)
+            {
+                gnuplotInput.WriteLine(String.Format("set label \"stuff {0}\" at <0,{1}> textcolor <{0}>", i, i * 1000));
+                gnuplotInput.Flush();
+            }
+            gnuplotInput.WriteLine("show label");
             gnuplotInput.Flush();
             gnuplotInput.WriteLine(plotCommand);
             Console.WriteLine(plotCommand);
