@@ -53,7 +53,7 @@ namespace Min_Searcher_2_Prototype_5
         private string mouseDataFile;//has just the location
         private string gridgenProgramName;
         private string minProgramName;
-
+        private bool autoDeMaxing = false;
         //most recent graph images
         private Image recentScatterPlot;
 
@@ -92,6 +92,9 @@ namespace Min_Searcher_2_Prototype_5
 
         private int maxGraphsOnScreen;
         private const int MIN_GRAPH_SIZE = 150;
+        //values for setting size of bin graphs
+        private float minRA = 0, maxRA = 0, minIA = 0, maxIA = 0;
+        private float minRE = 0, maxRE = 0, minIE = 0, maxIE = 0;
         #endregion
 
         //functions used to manipulate windows on the screen
@@ -666,6 +669,57 @@ namespace Min_Searcher_2_Prototype_5
                 }
                 ));
             }
+            //comparisons done to keep track of ranges for bin graphs
+            if (data.RealAlpha > bins[binNumber].maxRealAlpha)
+            {
+                bins[binNumber].maxRealAlpha = data.RealAlpha;
+                if (data.RealAlpha > this.maxRA)
+                    maxRA = (float)data.RealAlpha;
+            }
+            if (data.RealAlpha < bins[binNumber].minRealAlpha)
+            {
+                bins[binNumber].minRealAlpha = data.RealAlpha;
+                if (data.RealAlpha < this.minRA)
+                    minRA = (float)data.RealAlpha;
+            }
+            if (data.ImagAlpha > bins[binNumber].maxImagAlpha)
+            {
+                bins[binNumber].maxImagAlpha = data.ImagAlpha;
+                if (data.ImagAlpha > this.maxIA)
+                    maxIA = (float)data.ImagAlpha;
+            }
+            if (data.ImagAlpha < bins[binNumber].minImagAlpha)
+            {
+                bins[binNumber].minImagAlpha = data.ImagAlpha;
+                if (data.ImagAlpha < this.minIA)
+                    minIA = (float)data.ImagAlpha;
+            }
+
+            if (data.RealE > bins[binNumber].maxRealE)
+            {
+                bins[binNumber].maxRealE = data.RealE;
+                if (data.RealE > this.maxRE)
+                    maxRE = (float)data.RealE;
+            }
+            if (data.RealE < bins[binNumber].minRealE)
+            {
+                bins[binNumber].minRealE = data.RealE;
+                if (data.RealE < this.minRE)
+                    minRE = (float)data.RealE;
+            }
+            if (data.ImagE > bins[binNumber].maxImagE)
+            {
+                bins[binNumber].maxImagE = data.ImagE;
+                if (data.ImagE > this.maxIE)
+                    maxIE = (float)data.ImagE;
+            }
+            if (data.ImagE < bins[binNumber].minImagE)
+            {
+                bins[binNumber].minImagE = data.ImagE;
+                if (data.ImagE < this.maxIE)
+                    minIE = (float)data.ImagE;
+            }
+
             createBinGraphs();
         }
         //used to update the display of bin data including averages and std devs
@@ -1061,8 +1115,9 @@ namespace Min_Searcher_2_Prototype_5
             }
             binEGraphCreator.Close();
             binAGraphCreator.Close();
-            binGraphA = getBinGraphImage(BGAgnu, "alpha", graphData.StartIRange, graphData.EndIRange, graphData.StartRRange, graphData.EndRRange);
-            binGraphE = getBinGraphImage(BGEgnu, "energy", graphData.StartIRange, graphData.EndIRange, graphData.StartRRange, graphData.EndRRange);
+            //uses saved min and max values for the ranges of the graphs
+            binGraphA = getBinGraphImage(BGAgnu, "alpha", minIA-1, maxIA+1, minRA-1, maxRA+1);
+            binGraphE = getBinGraphImage(BGEgnu, "energy", minIE-1, maxIE+1, minRE-1, maxRE+1);
             Console.WriteLine("HI");
             this.aBinGraphPictureBox.Image = binGraphA;
             this.eBinGraphPictureBox.Image = binGraphE;
@@ -1274,7 +1329,7 @@ namespace Min_Searcher_2_Prototype_5
             {
                 while (true)
                 {
-                    var oldPosition = GetPlacement(windowId);
+                    //var oldPosition = GetPlacement(windowId);
                     
                     //adds on an extra folder to the name so that each will be in their own folder
                     gnuPlotInput.WriteLine("pause mouse; set print {0}; print MOUSE_X, MOUSE_Y; unset print;", mouseDataFile + "mouseData" + dataLocation + polyValue +
@@ -1282,7 +1337,7 @@ namespace Min_Searcher_2_Prototype_5
                     //waits for user to choose a point before resetting the gnuplot mouse clicks
                     WaitForChangedResult changeResult = mouseDataChecker.WaitForChanged(WatcherChangeTypes.All);
                     gnuPlotInput.Flush();
-                    if (oldPosition.showCmd != GetPlacement(windowId).showCmd)//if the window was maximized it will go to normal
+                    if (autoDeMaxing)//if the window was maximized it will go to normal
                     {
                         ShowWindow(windowId, 1);//move window back to normal
                     }
@@ -2519,6 +2574,14 @@ namespace Min_Searcher_2_Prototype_5
         {
             dataAndGraphChanger.SelectTab("dataPage");
         }
+        private void autoDeMaxingButton_Click(object sender, EventArgs e)
+        {
+            autoDeMaxing = !autoDeMaxing;
+            if (autoDeMaxing)
+                this.autoDeMaxingButton.Text = "Turn DeMaxing Off";
+            else
+                autoDeMaxingButton.Text = "Turn Demaxing On";
+        }
         #endregion
 
         //some private classes and structs
@@ -2765,7 +2828,6 @@ namespace Min_Searcher_2_Prototype_5
             //uncomment to enable console based debuggin
             AllocConsole();
         }
-
         
         //end temp stuffs
     }
@@ -2837,6 +2899,18 @@ namespace Min_Searcher_2_Prototype_5
     }
     public class Bin//this class is a bin of data that the user can put in similar results
     {
+        public Bin()
+        {
+            minRealAlpha = 0;
+            maxRealAlpha = 0;
+            minImagAlpha = 0;
+            maxImagAlpha = 0;
+
+            minRealE = 0;
+            maxRealE = 0;
+            minImagE = 0;
+            maxImagE = 0;
+        }
         public double AverageRealE { get; set; }
         public double AverageImagE { get; set; }
         public double StdDevRealE { get; set; }
@@ -2845,6 +2919,16 @@ namespace Min_Searcher_2_Prototype_5
         public double AverageImagAlpha { get; set; }
         public double StdDevRealAlpha { get; set; }
         public double StdDevImagAlpha { get; set; }
+
+        public double minRealAlpha { get; set; }
+        public double maxRealAlpha { get; set; }
+        public double minImagAlpha { get; set; }
+        public double maxImagAlpha { get; set; }
+        public double minRealE { get; set; }
+        public double maxRealE { get; set; }
+        public double minImagE { get; set; }
+        public double maxImagE { get; set; }
+
         public string BinName { get; set; }
         public List<MinSearchData> binData = new List<MinSearchData>();
     }
